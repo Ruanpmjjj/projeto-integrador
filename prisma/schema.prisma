@@ -6,6 +6,32 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id Int @id @unique @default(autoincrement())
+  nickName String @unique 
+  password String
+
+}
+
+model Movie {
+  id Int @id @unique @default(autoincrement())
+  title String
+  synopsis String
+  releaseYear String
+  duration Int
+}
+
+model Rating{
+  id Int @id @unique @default(autoincrement())
+  grade Int
+  description String
+}
+
+model Genre {
+  id Int @id @unique @default(autoincrement())
+  name String
 }
