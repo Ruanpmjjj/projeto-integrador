@@ -13,8 +13,12 @@ datasource db {
 model User {
   id Int @id @unique @default(autoincrement())
   nickName String @unique 
+  email String
   password String
 
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  ratings Rating[]
 }
 
 model Movie {
@@ -23,15 +27,31 @@ model Movie {
   synopsis String
   releaseYear String
   duration Int
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  genres Genre[]
+  ratings Rating[]
 }
 
 model Rating{
   id Int @id @unique @default(autoincrement())
   grade Int
   description String
+  userId Int @unique
+  movieId Int @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user User @relation(fields: [userId], references: [id])
+  movie Movie @relation(fields: [movieId], references: [id])
 }
 
 model Genre {
   id Int @id @unique @default(autoincrement())
   name String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  movies Movie[]
 }
