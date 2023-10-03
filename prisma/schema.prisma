@@ -25,7 +25,7 @@ model Movie {
   id Int @id @unique @default(autoincrement())
   title String
   synopsis String
-  releaseYear String
+  releaseYear Int
   duration Int
 
   created_at DateTime @default(now())
