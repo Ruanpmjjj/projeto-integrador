@@ -1,4 +1,5 @@
-import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelNickName, findUserByModelNickNmae } from "../model/user";
+import { stringify } from "querystring";
+import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelLoginByNickName, findUserByModelNickName, verifyEmail} from "../model/user";
 import { generateToken } from '@/servicess/tokenConfig';
 
 export async function createUser(_email: string, _nickName: string, _password: string) {
@@ -8,7 +9,7 @@ export async function createUser(_email: string, _nickName: string, _password: s
         return {message: "Email already registered."};
     }
 
-    const userByNickName = await findUserByModelNickNmae(_nickName);
+    const userByNickName = await findUserByModelNickName(_nickName);
 
         if (userByNickName != undefined) {
             return {message: "NickName already registered."};
@@ -30,9 +31,11 @@ export async function loginIfEmail(_email:string, _password:string) {
 }
 
 export async function loginIfNickName(_nickName:string, _password:string) {
-        const userLogin = await findUserByModelNickName(_nickName, _password);
+        const userLogin = await findUserByModelLoginByNickName(_nickName, _password);
 
         if (userLogin == undefined) {
             return {message: "incorrect NickName or Password"}
         }
+
+
 }
