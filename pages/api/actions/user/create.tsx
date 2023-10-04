@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createUser } from "../../controller/userController/UserController";
+import { createUser } from "../../controller/UserController";
 import userRequest from "@/request/userRequest";
 
 
