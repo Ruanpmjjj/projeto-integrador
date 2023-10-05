@@ -54,10 +54,3 @@ export async function findUserByModelLoginByNickName(_nickName:string, _password
     
     return user
 }
-
-export async function verifyEmail(_email:string) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(_email)) {
-      return false
-    }
-  }

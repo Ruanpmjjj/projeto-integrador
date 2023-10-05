@@ -1,7 +1,7 @@
 //import { isEmail, checkMinAndMaxLength } from "./check";
 import * as check from "./check";
 
-export default function userRequest( email: any, password: any, name: any){
+export default function userRequest(password: any, email: any, name: any){
 
     if (!check.isEmail(email)) {
         return {status: false, message: "Ivalid Email."};

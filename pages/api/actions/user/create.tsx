@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const {name , email , password} = req.body;
 
-    const checkRequest = userRequest(email, password, name);
+    const checkRequest = userRequest(password, email, name);
 
     if (checkRequest.status == false) {
         return res.status(403).json( {message: checkRequest.message} );
@@ -18,7 +18,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const response = await createUser(email, name, password);
 
-    if ( response.message != undefined) {
+    if ( response != undefined) {
         return res.status(200).json(response);
     }
+
 }

@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelLoginByNickName, findUserByModelNickName, verifyEmail} from "../model/user";
+import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelLoginByNickName, findUserByModelNickName} from "../model/user";
 import { generateToken } from '@/servicess/tokenConfig';
 
 export async function createUser(_email: string, _nickName: string, _password: string) {
@@ -19,23 +19,30 @@ export async function createUser(_email: string, _nickName: string, _password: s
         return response;
 }
 
-export async function loginIfEmail(_email:string, _password:string) {
-    const userLogin = await findUserByModelLoginByEmail(_email, _password);
-
-    if (userLogin == undefined) {
-        return {message: "incorrect email or password"}
+export async function login(_password:string, _email:string | null, _nickName:string | null) {
+    if (_email) {
+            const userLogin = await findUserByModelLoginByEmail(_email, _password);
+        
+            if (userLogin == undefined) {
+                return {message: "incorrect email or password"}
+            }
+        
+            const _token = generateToken(userLogin.email);
+            return {token: _token}
     }
 
-    const _token = generateToken(userLogin.email);
-    return {token: _token}
-}
-
-export async function loginIfNickName(_nickName:string, _password:string) {
+    if (_nickName) {
         const userLogin = await findUserByModelLoginByNickName(_nickName, _password);
-
+    
         if (userLogin == undefined) {
             return {message: "incorrect NickName or Password"}
         }
+        const _token = generateToken(userLogin.nickName);
 
+        return {token: _token}
+    }
 
+    return {
+        message: "Something went wrong"
+    }
 }
