@@ -1,0 +1,22 @@
+.createMovie {
+    background-color: gray;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.input {
+    margin: auto;
+    width: 300px;
+}
+
+.textarea {
+    margin: 20px 0;
+}
+
+.createMovieButton {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: black;
+    color: whitesmoke;
+}

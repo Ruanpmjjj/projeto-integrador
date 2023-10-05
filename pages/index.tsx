@@ -10,12 +10,13 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
-  //const sequelize = new Sequelize('URI_DATABASE_CREDENTIALS',{native: true});
   const [name, setName] = useState("");
-  const [movies, setMovies] = useState({ movies: []});
+  const [data, setData]: any = useState(undefined);
   const [movie, setMovie] = useState({
     title: '',
-    releaseDate: '',
+    releaseYear: '',
+    synopsis: '',
+    duration: '',
     createdAt: '',
     updatedAt: ''
   })
@@ -26,10 +27,12 @@ export default function Home() {
     });
 
     const responseJson = await response.json();
+    setData(responseJson);
+  }
 
-    useEffect(() => {
-      fetchData();
-    }, [])}
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   function logOut() {
     deleteCookie('authorization');
@@ -55,8 +58,10 @@ export default function Home() {
 
       setMovie({
         ...movie,
-        title: responseJson.name,
-        releaseDate: responseJson.releaseDate,
+        title: responseJson.title,
+        releaseYear: responseJson.releaseYear,
+        synopsis: responseJson.synopsis,
+        duration: responseJson.duration,
         createdAt: responseJson.created_at,
         updatedAt: responseJson.updated_at
       })
@@ -64,6 +69,13 @@ export default function Home() {
     catch (err) {
       console.log(err);
     }
+  }
+
+  function prettifyDateTime(str: string) {
+    const [date, time] = str.split("T");
+    const [year, month, day] = date.split("-");
+    
+    return `${day}/${month}/${year}`
   }
 
   return (
@@ -74,9 +86,10 @@ export default function Home() {
       <div className={styles.menuTopo}>
         <div className={styles.menuSuperior}>
           <div className={styles.menuSuperiorEsquerda}>
+            <a href={'/movie/create'}>Create Movie</a>
           </div>
           <div className={styles.menuSuperiorDireita}>
-            <a onClick={logOut}>Log Out</a>
+            <a className={styles.cursor} onClick={logOut}>Log Out</a>
           </div>
         </div>
       </div>
@@ -84,23 +97,25 @@ export default function Home() {
         <div className={styles.searchBar}>
           <form onSubmit={formSubmit}>
             <div className={styles.gapInputButton}>
-              <input className={styles.inputPesquisa} type="text" placeholder='Search bar' value={name} onChange={(evento) => { handleFormEdit(evento) }} />
+              <input className={styles.inputPesquisa} type="text" placeholder='Search Movie' value={name} onChange={(evento) => { handleFormEdit(evento) }} />
               <button className={styles.searchButton}>SEARCH</button>
             </div>
           </form>
         </div>
       </header>
-      <div>
-        <div className={styles.container}>
-          <div className={styles.blocoFilmes}>
-            <section>
-              <h3>{movie.title}</h3>
-              <p>{movie.releaseDate}</p>
-              <p>{movie.createdAt}</p>
-              <p>{movie.updatedAt}</p>
-            </section>
+      <div className='flex'>
+        {data != undefined && data instanceof Array ? data.map(item => (
+          <div className={styles.container}>
+            <h3>{item.title}</h3>
+            <p>{prettifyDateTime(item.releaseYear)}</p>
+            <p>{item.synopsis}</p>
+            <p>{prettifyDateTime(item.duration)}</p>
+            <p>{prettifyDateTime(item.created_at)}</p>
+            <p>{prettifyDateTime(item.updated_at)}</p>
           </div>
-        </div>
+        ))
+          : <p>No movies found</p>
+        }
       </div>
     </main>
   )

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Head from "next/head";
 import Link from "next/link";
-import styles from "@/styles/login.module.css"
+import styles from "@/styles/createMovie.module.css"
 import { getCookie } from 'cookies-next';
 import { checkToken } from '@/services/tokenConfig';
 
@@ -48,20 +48,18 @@ export default function createMovie() {
     return (
         <main className="flex min-h-screen flex-col   m-24">
             <Head>
-                <title>Cadastrar Filme</title>
+                <title>Create Movie</title>
             </Head>
-            <div className={styles.formCard}>
-                <Link className={styles.sendButton} href={`/`}>Voltar</Link>
-
-                <form onSubmit={formSubmit}>
+            <Link className={styles.sendButton} href={`/`}>Back</Link>
+            <form onSubmit={formSubmit}>
+                <div className={styles.createMovie}>
                     <input className={styles.input} type="text" value={formData.title} onChange={(event) => handleFormEdit(event , "title")} placeholder="Title"/>
-                    <textarea className={styles.input} value={formData.synopsis} onChange={(event) => handleFormEdit(event, "synopsis")} placeholder="Synopsis"></textarea>
-                    <input className={styles.input} type="number" value={formData.releaseYear} onChange={(event) => handleFormEdit(event, "releaseYear")} maxLength={4} placeholder="Release Year"/>
-                    <input className={styles.input} type="number" value={formData.duration} onChange={(event) => handleFormEdit(event, "duration")}/>
-                    <button className={styles.button}>Enviar</button>
-                </form>
-            </div>
-
+                    <textarea className={styles.textarea} value={formData.synopsis} onChange={(event) => handleFormEdit(event, "synopsis")} placeholder="Synopsis"></textarea>
+                    <input className={styles.input} type="date" value={formData.releaseYear} onChange={(event) => handleFormEdit(event, "releaseYear")} maxLength={4} placeholder="Release Year"/>
+                    <input className={styles.input} type="time" value={formData.duration} onChange={(event) => handleFormEdit(event, "duration")}/>
+                    <button className={styles.createMovieButton}>Send</button>
+                </div>
+            </form>
         </main>
     );
 }
