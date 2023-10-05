@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from "@/styles/home.module.css";
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +14,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [movies, setMovies] = useState({ movies: []});
   const [movie, setMovie] = useState({
-    name: '',
+    title: '',
     releaseDate: '',
     createdAt: '',
     updatedAt: ''
@@ -54,7 +55,7 @@ export default function Home() {
 
       setMovie({
         ...movie,
-        name: responseJson.name,
+        title: responseJson.name,
         releaseDate: responseJson.releaseDate,
         createdAt: responseJson.created_at,
         updatedAt: responseJson.updated_at
@@ -67,6 +68,9 @@ export default function Home() {
 
   return (
     <main className={`flex min-h-screen flex-col ${inter.className}`}>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className={styles.menuTopo}>
         <div className={styles.menuSuperior}>
           <div className={styles.menuSuperiorEsquerda}>
@@ -88,10 +92,14 @@ export default function Home() {
       </header>
       <div>
         <div className={styles.container}>
-          <p>{movie.name}</p>
-          <p>{movie.releaseDate}</p>
-          <p>{movie.createdAt}</p>
-          <p>{movie.updatedAt}</p>
+          <div className={styles.blocoFilmes}>
+            <section>
+              <h3>{movie.title}</h3>
+              <p>{movie.releaseDate}</p>
+              <p>{movie.createdAt}</p>
+              <p>{movie.updatedAt}</p>
+            </section>
+          </div>
         </div>
       </div>
     </main>

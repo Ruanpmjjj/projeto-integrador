@@ -25,8 +25,9 @@ model Movie {
   id Int @id @unique @default(autoincrement())
   title String
   synopsis String
-  releaseYear String
+  releaseYear Int
   duration Int
+  publicId String @unique @default(cuid())
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
