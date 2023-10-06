@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createUser } from "../../controller/UserController";
 import userRequest from "@/request/userRequest";
+import { stringify } from "querystring";
+
 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,15 +10,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(403).json({message: "Method not allowed."});
     }
 
-    const {name , email , password} = req.body;
+    const {_name , _email , _password} = req.body;
 
-    const checkRequest = userRequest(password, email, name);
+    const checkRequest = userRequest(_password, _email, _name);
 
     if (checkRequest.status == false) {
         return res.status(403).json( {message: checkRequest.message} );
     }
 
-    const response = await createUser(email, name, password);
+    const response = await createUser(_email, _name, _password);
 
     if ( response != undefined) {
         return res.status(200).json(response);
