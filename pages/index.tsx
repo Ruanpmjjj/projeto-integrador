@@ -78,6 +78,10 @@ export default function Home() {
     return `${day}/${month}/${year}`
   }
 
+  function movieClick(publicId: string) {
+    router.push(`/movie/` + publicId);
+  }
+
   return (
     <main className={`flex min-h-screen flex-col ${inter.className}`}>
       <Head>
@@ -105,13 +109,16 @@ export default function Home() {
       </header>
       <div className='flex'>
         {data != undefined && data instanceof Array ? data.map(item => (
-          <div className={styles.container}>
-            <h3>{item.title}</h3>
-            <p>{prettifyDateTime(item.releaseYear)}</p>
-            <p>{item.synopsis}</p>
-            <p>{prettifyDateTime(item.duration)}</p>
-            <p>{prettifyDateTime(item.created_at)}</p>
-            <p>{prettifyDateTime(item.updated_at)}</p>
+          <div onClick={() => {movieClick(item.title)}} className={styles.container}>
+            <img className={styles.movieImg} src="/images/movie.png" alt={item.title} />
+            <div className={styles.movieInfo}>
+              <h3>{item.title}</h3>
+              <p>{item.releaseYear}</p>
+              <p>{item.synopsis}</p>
+              <p>{item.duration}</p>
+              <p>{prettifyDateTime(item.created_at)}</p>
+              <p>{prettifyDateTime(item.updated_at)}</p>
+            </div>
           </div>
         ))
           : <p>No movies found</p>
