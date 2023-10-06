@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { findMoviesByTitle } from "../../controller/MovieController";
+import { findMovieByPublicId } from "../../controller/MovieController";
 import { isString } from "@/request/Check";
 
 export default async (req:NextApiRequest , res:NextApiResponse) => {
@@ -7,13 +7,13 @@ export default async (req:NextApiRequest , res:NextApiResponse) => {
         return res.status(403).json( { message: "Method not allowed" } );
     }
 
-    const { title } = req.query;
+    const { publicId } = req.query;
 
-    if ( title == undefined || !isString(title) || title instanceof Array ) {
+    if ( publicId == undefined || !isString(publicId) || publicId instanceof Array ) {
         return res.status(403).json({ message: "Invalid query" });
     }
 
-    const response = await findMoviesByTitle(title);
+    const response = await findMovieByPublicId(publicId);
 
     if ( response.message != undefined ) {
         return res.status(403).json( response );

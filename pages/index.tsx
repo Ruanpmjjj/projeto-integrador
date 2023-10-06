@@ -109,7 +109,7 @@ export default function Home() {
       </header>
       <div className='flex'>
         {data != undefined && data instanceof Array ? data.map(item => (
-          <div onClick={() => {movieClick(item.title)}} className={styles.container}>
+          <div onClick={() => {movieClick(item.publicId)}} className={`${styles.container} ${styles.cursor}`}>
             <img className={styles.movieImg} src="/images/movie.png" alt={item.title} />
             <div className={styles.movieInfo}>
               <h3>{item.title}</h3>

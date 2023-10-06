@@ -1,0 +1,23 @@
+.container{
+    width: fit-content;
+    margin: auto;
+    background-color: gray;
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.flexInfoMovie {
+    display: flex;
+    padding: 30px;
+}
+
+.movieImg {
+    height: 300px;
+}
+
+.movieInfo {
+    margin: auto;
+}
+
