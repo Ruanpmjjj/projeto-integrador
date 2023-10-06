@@ -15,24 +15,50 @@ body {
 }
 
 .login-div {
-  background-color: burlywood;
+  background-color: rgb(221, 189, 148);
   text-align: center;
-  margin-top: 20%;
+  margin-top: 15%;
   padding-top: 20px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   padding-top: 40px;
   border-radius: 10px;
 }
 
-.login-button {
-  background-color: rgba(114, 77, 29, 0.767);
+input {
   border-radius: 7px;
 }
 
-button:hover {
-  background-color: chocolate;
+button {
+  margin-top: 30px;
+}
+
+.form-reg {
+  background-color: rgb(221, 189, 148);
+  text-align: center;
+  margin-top: 6%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-top: 40px;
+  border-radius: 10px;
 }
 
 input {
-  border-radius: 7px;
+  margin-bottom: 2px;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.button-log {
+  margin-top: 5px;
+  margin-right: 55px;
+  font-size: 13px;
+}
+
+.button-log:hover {
+  color: aliceblue;
+}
+
+.p-1 {
+  margin-top: 1%;
+  margin-bottom: 30px;
+  font-size: 30px;
 }
