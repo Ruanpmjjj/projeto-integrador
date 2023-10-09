@@ -20,20 +20,36 @@ export default function moviePage({movieId}: any) {
     }, [])
 
     return (
-        <main className='flex min-h-screen flex-col'>
-            <a href="/">Back to Home Page</a>
-            {data != undefined ?
-                <div className={styles.container}>
-                    <div className={styles.flexInfoMovie}>
-                        <img className={styles.movieImg} src="/images/movie.png" alt={data.title} />
-                        <div className={styles.movieInfo}>
-                            <h1>{data.title}</h1>
-                            <h2>{data.releaseYear}</h2>
-                            <p>{data.synopsis}</p>
-                        </div>
+        <main className={`flex min-h-screen flex-col ${styles.pageBackground}`}>
+            <div className={styles.menuTopo}>
+                <div className={styles.menuSuperior}>
+                    <div className={styles.menuSuperiorEsquerda}>
+                        <a className={styles.cursor} href={'/'}>Back to Home Page</a>
+                    </div>
+                    <div className={styles.menuSuperiorDireita}>
+                        <a className={styles.cursor}>Log Out</a>
                     </div>
                 </div>
-            : <p>Movie not found</p>}
+            </div>
+            <div className={styles.moviePage}>
+            {data != undefined ?
+                    <div className={styles.container}>
+                        <div className={styles.flexInfoMovie}>
+                            <img className={styles.movieImg} src="/images/movie.png" alt={data.title} />
+                            <div className={styles.movieInfo}>
+                                <h1 className={styles.h1}>{data.title}</h1>
+                                <div className={styles.h2}>
+                                    <h2>Release Date: {data.releaseYear}</h2>
+                                    <h2>Duration: {data.duration}</h2>
+                                </div>
+                                <h3 className={styles.h3}>Synopsis</h3>
+                                <p className={styles.p}>{data.synopsis}</p>
+                                <h3 className={styles.h3}>Rating</h3>
+                            </div>
+                        </div>
+                    </div>
+                : <p>Movie not found</p>}
+            </div>
         </main>
     )
 }

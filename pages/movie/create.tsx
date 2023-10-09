@@ -46,20 +46,36 @@ export default function createMovie() {
     }
 
     return (
-        <main className="flex min-h-screen flex-col   m-24">
-            <Head>
-                <title>Create Movie</title>
-            </Head>
-            <Link className={styles.sendButton} href={`/`}>Back</Link>
-            <form onSubmit={formSubmit}>
-                <div className={styles.createMovie}>
-                    <input className={styles.input} type="text" value={formData.title} onChange={(event) => handleFormEdit(event , "title")} placeholder="Title"/>
-                    <textarea className={styles.textarea} value={formData.synopsis} onChange={(event) => handleFormEdit(event, "synopsis")} placeholder="Synopsis"></textarea>
-                    <input className={styles.input} type="date" value={formData.releaseYear} onChange={(event) => handleFormEdit(event, "releaseYear")} maxLength={4} placeholder="Release Year"/>
-                    <input className={styles.input} type="time" value={formData.duration} onChange={(event) => handleFormEdit(event, "duration")}/>
-                    <button className={styles.createMovieButton}>Send</button>
+        <main className={`flex min-h-screen flex-col ${styles.pageBackground}`}>
+            <div className={styles.menuTopo}>
+                <div className={styles.menuSuperior}>
+                    <div className={styles.menuSuperiorEsquerda}>
+                        <a className={styles.cursor} href={'/'}>Back to Home Page</a>
+                    </div>
+                    <div className={styles.menuSuperiorDireita}>
+                        <a className={styles.cursor}>Log Out</a>
+                    </div>
                 </div>
-            </form>
+            </div>
+            <div className={styles.createMoviePage}>
+                <Head>
+                    <title>Create Movie</title>
+                </Head>
+                <h1 className={styles.h1}>Create Movie</h1>
+                <form onSubmit={formSubmit}>
+                    <div className={styles.movieForm}>
+                        <label className={styles.label} htmlFor="title">Movie Title</label>
+                        <input id='title' className={styles.input} type="text" value={formData.title} onChange={(event) => handleFormEdit(event , "title")} placeholder="E.g.: I am Legend" required autoFocus/>
+                        <label className={styles.label} htmlFor="releaseYear">Release Date</label>
+                        <input id='releaseYear' className={`${styles.input} ${styles.inputTimeDate}`} type="date" value={formData.releaseYear} onChange={(event) => handleFormEdit(event, "releaseYear")} required/>
+                        <label className={styles.label} htmlFor="duration">Duration</label>
+                        <input id='duration' className={`${styles.input} ${styles.inputTimeDate}`} type="time" value={formData.duration} onChange={(event) => handleFormEdit(event, "duration")} required/>
+                        <label className={styles.label} htmlFor="synopsis">Synopsis</label>
+                        <textarea id='synopsis' className={`${styles.input} ${styles.textarea}`} value={formData.synopsis} onChange={(event) => handleFormEdit(event, "synopsis")} placeholder="E.g.: Robert Neville is a brilliant scientist and the only survivor of an epidemic that turned humans into bloodthirsty mutants. Walking around New York City, he looks for other possible survivors and tries to find a cure for the plague using his own blood, which is immune." required></textarea>
+                        <button className={styles.createMovieButton}>Create</button>
+                    </div>
+                </form>
+            </div>
         </main>
     );
 }

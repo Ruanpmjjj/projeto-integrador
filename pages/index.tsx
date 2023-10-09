@@ -83,14 +83,14 @@ export default function Home() {
   }
 
   return (
-    <main className={`flex min-h-screen flex-col ${inter.className}`}>
+    <main className={`flex min-h-screen flex-col ${styles.pageBackground} ${inter.className}`}>
       <Head>
         <title>Home</title>
       </Head>
       <div className={styles.menuTopo}>
         <div className={styles.menuSuperior}>
           <div className={styles.menuSuperiorEsquerda}>
-            <a href={'/movie/create'}>Create Movie</a>
+            <a className={styles.cursor} href={'/movie/create'}>Create Movie</a>
           </div>
           <div className={styles.menuSuperiorDireita}>
             <a className={styles.cursor} onClick={logOut}>Log Out</a>
@@ -101,23 +101,21 @@ export default function Home() {
         <div className={styles.searchBar}>
           <form onSubmit={formSubmit}>
             <div className={styles.gapInputButton}>
-              <input className={styles.inputPesquisa} type="text" placeholder='Search Movie' value={name} onChange={(evento) => { handleFormEdit(evento) }} />
+              <input className={styles.inputPesquisa} type="text" placeholder='Search Movie' value={name} onChange={(evento) => { handleFormEdit(evento) }} autoFocus/>
               <button className={styles.searchButton}>SEARCH</button>
             </div>
           </form>
         </div>
       </header>
-      <div className='flex'>
+      <h1 className={styles.h1}>Best Movies</h1>
+      <div className={`flex flex-wrap ${styles.movies}`}>
         {data != undefined && data instanceof Array ? data.map(item => (
           <div onClick={() => {movieClick(item.publicId)}} className={`${styles.container} ${styles.cursor}`}>
             <img className={styles.movieImg} src="/images/movie.png" alt={item.title} />
             <div className={styles.movieInfo}>
-              <h3>{item.title}</h3>
-              <p>{item.releaseYear}</p>
-              <p>{item.synopsis}</p>
-              <p>{item.duration}</p>
-              <p>{prettifyDateTime(item.created_at)}</p>
-              <p>{prettifyDateTime(item.updated_at)}</p>
+              <h3 className={styles.h3}>{item.title}</h3>
+              <p>Release: {item.releaseYear}</p>
+              <p>Duration: {item.duration}</p>
             </div>
           </div>
         ))
