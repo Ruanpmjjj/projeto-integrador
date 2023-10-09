@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/register.module.css"
+import Link from "next/link";
 
 export default function cadastroPage() {
     const router = useRouter();
@@ -10,7 +11,7 @@ export default function cadastroPage() {
         {
             nickName: '',
             email: '',
-            password: '',
+            password: ''
         }
     )
 
@@ -67,7 +68,7 @@ export default function cadastroPage() {
                 <p>{error}</p>
                 <div>
                     <span className="block text-sm font-medium text-slate-700">UserName</span>
-                    <input className={styles.input} type="text" placeholder="Name" value={formData.nickName} onChange={(evento) => { handleFormEdit(evento, 'nickName') }} required />
+                    <input className={styles.input} type="text" placeholder="Nome" value={formData.nickName} onChange={(evento) => { handleFormEdit(evento, 'nickName') }} required />
                     <br></br>
                     <span className="block text-sm font-medium text-slate-700">Email</span>
                     <input className={styles.input} type="email" placeholder="@gmail.com" value={formData.email} onChange={(evento) => { handleFormEdit(evento, 'email') }} required />
@@ -75,7 +76,7 @@ export default function cadastroPage() {
                     <span className="block text-sm font-medium text-slate-700">Password</span>
                     <input className={styles.input} type="password" placeholder="Senha" value={formData.password} onChange={(evento) => { handleFormEdit(evento, 'password') }} required />
                     <br />
-                    <button className={styles.button}>ja tenho uma conta</button>
+                    <Link className={styles.buttonLog} href={"/user/login"}>ja tenho uma conta</Link>
                     <br></br>
                     <button className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                         Logar

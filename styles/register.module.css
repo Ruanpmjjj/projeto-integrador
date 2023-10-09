@@ -24,7 +24,8 @@
 
 .buttonLog {
     margin-top: 5px;
-    margin-right: 55px;
+    margin-right: 65px;
+    margin-bottom: 25px;
     font-size: 13px;
 }
 
@@ -36,4 +37,16 @@
     margin-top: 1%;
     margin-bottom: 30px;
     font-size: 30px;
+}
+
+/* Login */
+
+.sendButton{
+    margin-top: 5px;
+    margin-bottom: 55px;
+    font-size: 13px;
+}
+
+.sendButton:hover {
+    color: aliceblue;
 }

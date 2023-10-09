@@ -1,6 +1,7 @@
 import { stringify } from "querystring";
 import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelLoginByNickName, findUserByModelNickName} from "../model/user";
 import { generateToken } from '@/servicess/tokenConfig';
+import Link from 'next/link';
 
 export async function createUser(_email: string, _nickName: string, _password: string) {
     const userByEmail = await findUserByModelEmail(_email);
@@ -45,4 +46,20 @@ export async function login(_password:string, _email:string | null, _nickName:st
     return {
         message: "Something went wrong"
     }
+}
+
+export async function sendButton() {
+    return (
+        <Link href="user/register">
+          <a>Não tenho uma conta</a>
+        </Link>
+      );
+}
+
+export async function buttonLog() {
+    return (
+        <Link href="user/login">
+          <a>Não tenho uma conta</a>
+        </Link>
+      );
 }
