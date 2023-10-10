@@ -17,6 +17,13 @@ export async function findMovieByPublicIdModel(publicId: string) {
     const movie = await prisma.movie.findUnique({
         where: {
             publicId: publicId
+        },
+        include: {
+            ratings: {
+                include: {
+                    user: true,
+                }
+            }
         }
     });
 
