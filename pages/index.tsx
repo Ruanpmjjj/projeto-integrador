@@ -1,118 +1,150 @@
-import Image from 'next/image'
+import { checkToken } from '@/services/tokenConfig';
+import { deleteCookie, getCookie } from 'cookies-next'
 import { Inter } from 'next/font/google'
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import styles from "@/styles/home.module.css";
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [data, setData]: any = useState(undefined);
+  const [movie, setMovie] = useState({
+    title: '',
+    releaseYear: '',
+    synopsis: '',
+    duration: '',
+    createdAt: '',
+    updatedAt: ''
+  })
+
+  async function fetchData() {
+    const response = await fetch(`/api/actions/movie/select`, {
+      method: 'GET'
+    });
+
+    const responseJson = await response.json();
+    setData(responseJson);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  function logOut() {
+    deleteCookie('authorization');
+    router.push(`/user/login`);
+  }
+
+  function handleFormEdit(event: any) {
+    setName(event.target.value);
+  }
+
+  async function formSubmit(event: any) {
+    try {
+      event.preventDefault();
+
+      const response = await fetch(`/api/actions/movie/find?name=` + name, {
+        method: 'GET'
+      })
+
+      const responseJson = await response.json();
+
+      console.log(response.status);
+      console.log(responseJson);
+
+      setMovie({
+        ...movie,
+        title: responseJson.title,
+        releaseYear: responseJson.releaseYear,
+        synopsis: responseJson.synopsis,
+        duration: responseJson.duration,
+        createdAt: responseJson.created_at,
+        updatedAt: responseJson.updated_at
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+  function prettifyDateTime(str: string) {
+    const [date, time] = str.split("T");
+    const [year, month, day] = date.split("-");
+    
+    return `${day}/${month}/${year}`
+  }
+
+  function movieClick(publicId: string) {
+    router.push(`/movie/` + publicId);
+  }
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={`flex min-h-screen flex-col ${styles.pageBackground} ${inter.className}`}>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <div className={styles.menuTopo}>
+        <div className={styles.menuSuperior}>
+          <div className={styles.menuSuperiorEsquerda}>
+            <a className={styles.cursor} href={'/movie/create'}>Create Movie</a>
+          </div>
+          <div className={styles.menuSuperiorDireita}>
+            <a className={styles.cursor} onClick={logOut}>Log Out</a>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <header className={styles.fundoPesquisa}>
+        <div className={styles.searchBar}>
+          <form onSubmit={formSubmit}>
+            <div className={styles.gapInputButton}>
+              <input className={styles.inputPesquisa} type="text" placeholder='Search Movie' value={name} onChange={(evento) => { handleFormEdit(evento) }} autoFocus/>
+              <button className={styles.searchButton}>SEARCH</button>
+            </div>
+          </form>
+        </div>
+      </header>
+      <h1 className={styles.h1}>Best Movies</h1>
+      <div className={`flex flex-wrap ${styles.movies}`}>
+        {data != undefined && data instanceof Array ? data.map(item => (
+          <div onClick={() => {movieClick(item.publicId)}} className={`${styles.container} ${styles.cursor}`}>
+            <img className={styles.movieImg} src="/images/movie.png" alt={item.title} />
+            <div className={styles.movieInfo}>
+              <h3 className={styles.h3}>{item.title}</h3>
+              <p>Release: {item.releaseYear}</p>
+              <p>Duration: {item.duration}</p>
+            </div>
+          </div>
+        ))
+          : <p>No movies found</p>
+        }
       </div>
     </main>
   )
+}
+
+export function getServerSideProps({ req, res }: any) {
+  try {
+    const token = getCookie('authorization', { req, res });
+
+    if (!token) {
+      throw new Error('Invalid token');
+    }
+
+    checkToken(token);
+
+    return { props: {} };
+  }
+  catch (err) {
+    return {
+      /*redirect: {
+        permanent: false,
+        destination: `/user/login`,
+      },*/
+      props: {}
+    }
+  }
 }
