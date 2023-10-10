@@ -1,14 +1,7 @@
 //import { isEmail, checkMinAndMaxLength } from "./check";
 import * as check from "./check";
 
-export default function userRequest(cpf: any, email: any, password: any, name: any){
-    if (!check.checkMinAndMaxLength(cpf, 14, 14)) {
-        return {status: false, message: "Invalid CPF."};
-    }
-
-    /*if (!check.isValidCpf(cpf)) {
-        return {status: false, message: "Invalid 2.0 CPF."};
-    }*/
+export default function userRequest(password: any, email: any, name: any){
 
     if (!check.isEmail(email)) {
         return {status: false, message: "Ivalid Email."};
