@@ -1,43 +1,38 @@
-export function isString(value: any): boolean{
-    if ((value instanceof String) || (typeof value === 'string'))
-        return true;
-    return false;
-}
-
-export function checkMinAndMaxLength(value: any, min: number, max: number):boolean {
-    let verifyValue = undefined;
-
-    if (isString(value)) {
-        verifyValue = String(value);
-    }
-
-    if (verifyValue == undefined) {
+export function isEmail(_email:any): boolean {
+    if ( !isString(_email) ) {
         return false;
     }
 
-    if ((verifyValue.length >= min) && (verifyValue.length <= max)) {
-        return true;
-    }
-    return false;
-}
-
-export function isEmail(value: any): boolean{
-    if (!isString(value)) {
-        return false;
-    }
-    
     const check = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
 
-    return check.test(value);
-
+    return check.test(_email);
 }
 
-/*export function isValidCpf(value: any): boolean{
-    if (!isString(value)) {
+export function isString(_value:any): boolean {
+    if ( (_value instanceof String || typeof _value === 'string' ) ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+export function checkMinAndMaxLength(_value:any , min:number , max: number): boolean {
+    let verifyValue = undefined;
+
+    if ( isString(_value) ) {
+        verifyValue = String(_value);
+    }
+    
+    if ( verifyValue == undefined ) {
         return false;
     }
 
-    const check = /^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})*$/gi;
-    return check.test(value);
-
-}*/
+    if ( verifyValue.length >= min && verifyValue.length <= max ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
