@@ -1,14 +1,55 @@
 import styles from "@/styles/register.module.css"
 import Head from "next/head";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 import { useState } from "react";
 import { setCookie } from "cookies-next";
+import { error } from "console";
 
 export default function loginPage() {
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         login: '',
         password: ''
     })
+
+    function handleFormEdit(event:any, field:any) {
+        setFormData({
+            ...formData,
+            [field]: event.target.value
+        });
+    }
+
+    async function formSubmit(event:any) {
+        try{
+            event.preventDefault();
+
+            const response = await fetch (`/api/actions/user/userLogin`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const responseJson = await response.json();
+
+            console.log(responseJson);
+            console.log(response.status);
+
+            if (response.status != 200) {
+                throw new Error(responseJson.message);
+            }
+
+            setCookie('authorization', responseJson.token);
+
+            router.push(`/`);
+        }
+        catch (err:any) {
+            alert(err.message);
+        }
+    }   
 
     return (
         <main className={styles.back}>
@@ -17,15 +58,17 @@ export default function loginPage() {
                     <title>Login</title>
                 </Head>
 
-                <div className="login-div">
+                <div className={styles.formCard}>
                     <p className={styles.p1}>Login</p>
-                    <form>
+                    <form onSubmit={formSubmit}>
                         <label className="block">
                             <span className="block text-sm font-medium text-slate-700">UserName or Email</span>
-                            <input className={styles.input} type="text" placeholder="login" />
+                            <input className={styles.input} type="text" placeholder="login" value={formData.login}
+                                onChange={(event)=> handleFormEdit(event, 'login')} required/>
                             <p></p>
                             <span className="block text-sm font-medium text-slate-700">Password</span>
-                            <input className={styles.input} type="password" placeholder="senha" />
+                            <input className={styles.input} type="password" placeholder="senha" value={formData.password}
+                                onChange={(event)=> handleFormEdit(event, 'password')} required />
                             <p></p>
                             <Link className={styles.sendButton} href={`/user/register`}>Não tenho uma conta</Link>
                             <br />
