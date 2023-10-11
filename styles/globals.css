@@ -11,11 +11,11 @@
 }
 
 body {
-  background-color: beige;
+  background-color: gainsboro;
 }
 
 .login-div {
-  background-color: rgb(221, 189, 148);
+  background-color: rgb(255, 255, 255);
   text-align: center;
   margin-top: 12%;
   padding-top: 20px;

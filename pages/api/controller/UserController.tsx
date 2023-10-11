@@ -1,6 +1,6 @@
 import { stringify } from "querystring";
 import { createUserModel, findUserByModelEmail, findUserByModelLoginByEmail, findUserByModelLoginByNickName, findUserByModelNickName} from "../model/user";
-import { generateToken } from '@/servicess/tokenConfig';
+import { generateToken } from '@/services/tokenConfig';
 import Link from 'next/link';
 
 export async function createUser(_email: string, _nickName: string, _password: string) {

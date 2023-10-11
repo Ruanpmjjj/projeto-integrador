@@ -1,40 +1,38 @@
 .formReg {
-    background-color: rgb(221, 189, 148);
+    background-color: rgb(255, 255, 255);
     text-align: center;
     margin-top: 6%;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     padding-top: 40px;
     border-radius: 10px;
+    border-color: black 5px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-
-
-.button {
+.butReg {
     margin-top: 30px;
+    margin-bottom: -24px;
 }
 
 .input {
-    margin-bottom: 2px;
-    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 10px;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 7px;
 }
 
 .buttonLog {
-    margin-top: 5px;
     margin-right: 65px;
-    margin-bottom: 25px;
     font-size: 13px;
 }
 
 .buttonLog:hover {
-    color: aliceblue;
+    color: rgb(120, 172, 218);
 }
 
 .p1 {
-    margin-top: 1%;
+    margin-top: 1px;
     margin-bottom: 30px;
     font-size: 30px;
 }
@@ -48,5 +46,14 @@
 }
 
 .sendButton:hover {
-    color: aliceblue;
+    color: rgb(120, 172, 218);
+}
+
+.back {
+    background-color: gainsboro;
+}
+
+.butLog {
+    margin-top: 30px;
+    margin-bottom: -5px;
 }

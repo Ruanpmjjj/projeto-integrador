@@ -1,6 +1,6 @@
 import { prisma } from "@/db";
 
-export async function createMovieModel(title: string , synopsis: string, releaseYear: string, duration: string) {
+export async function createMovieModel(title: string , synopsis: string, releaseYear: string, duration: string, genres: Array<number>) {
     const movie = await prisma.movie.create({
         data: {
             title: title,
@@ -9,6 +9,7 @@ export async function createMovieModel(title: string , synopsis: string, release
             duration: duration
         }
     });
+
 
     return movie;
 }
