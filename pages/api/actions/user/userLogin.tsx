@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { password, email, nickName} = req.body;
 
-    const response = await login(password, email, nickName);
+    const response = await login(password, email || null, nickName ||null);
 
     if (response.message != undefined) {
         return res.status(403).json(response);
