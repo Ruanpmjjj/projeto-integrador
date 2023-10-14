@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { grade, description, userName, movieTitle } = req.body;
 
     // create model
-    const response = await createRating(grade, description, userName, movieTitle);
+    const response: any = await createRating(grade, description, userName, movieTitle);
 
     if ( response.message != undefined ) {
         return res.status(403).json( response );

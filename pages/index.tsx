@@ -8,18 +8,11 @@ import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ verifiedToken }: any) {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [data, setData]: any = useState(undefined);
-  const [movie, setMovie] = useState({
-    title: '',
-    releaseYear: '',
-    synopsis: '',
-    duration: '',
-    createdAt: '',
-    updatedAt: ''
-  })
+  const [data, setData]: Array<any> = useState(undefined);
+  const [saveData, setSaveData]: Array<any> = useState(undefined);
 
   async function fetchData() {
     const response = await fetch(`/api/actions/movie/select`, {
@@ -27,7 +20,9 @@ export default function Home() {
     });
 
     const responseJson = await response.json();
+
     setData(responseJson);
+    setSaveData(responseJson);
   }
 
   useEffect(() => {
@@ -43,28 +38,24 @@ export default function Home() {
     setName(event.target.value);
   }
 
+  function searchFilter(array: Array<any>, text: string) {
+    if (text == '') {
+      return array;
+    }
+    else {
+      return array.filter(
+        (el: any) => el.name.toLowerCase().includes(text)
+      )
+    }
+  }
+
   async function formSubmit(event: any) {
     try {
       event.preventDefault();
 
-      const response = await fetch(`/api/actions/movie/find?name=` + name, {
-        method: 'GET'
-      })
+      const filteredArray = searchFilter(saveData, name); 
+      setData(filteredArray);
 
-      const responseJson = await response.json();
-
-      console.log(response.status);
-      console.log(responseJson);
-
-      setMovie({
-        ...movie,
-        title: responseJson.title,
-        releaseYear: responseJson.releaseYear,
-        synopsis: responseJson.synopsis,
-        duration: responseJson.duration,
-        createdAt: responseJson.created_at,
-        updatedAt: responseJson.updated_at
-      })
     }
     catch (err) {
       console.log(err);

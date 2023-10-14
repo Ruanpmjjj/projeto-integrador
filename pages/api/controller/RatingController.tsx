@@ -1,9 +1,10 @@
 import { findMovieByPublicIdModel } from "../model/Movie";
+import { findUserByModelEmail } from "../model/user";
 import * as ratingModel from "../model/Rating";
 
 export async function createRating(grade: number, email: string, moviePublicId: string, description = "") {
     try {
-        const userByEmail = await findUserModelByEmail(email);
+        const userByEmail = await findUserByModelEmail(email);
         
         if (userByEmail == undefined) {
             return { message: "User not found."};
