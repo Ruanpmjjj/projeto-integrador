@@ -72,6 +72,52 @@
     color: white;
 }
 
+.h4 {
+    margin-bottom: 0.8rem;
+    color: white;
+}
+
+.reviewInputs {
+    display: flex;
+    margin-left: 40px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.descriptionDiv {
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    margin: 10px 0 10px 40px;
+}
+
+.textareaDescription {
+    border: 1px solid black;
+    border-radius: 3px;
+    min-height: 80px;
+    width: 280px;
+}
+
+.inputGrades {
+    margin: auto 0;   
+}    
+
+.labelInputs {
+    margin: auto 1em;
+}
+.radioButtons {
+    margin-left: 1em;
+}
+
+.sendButton {
+    background-color: black;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
 .p {
     text-align: justify;
     color: white;

@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const response = await createUser(email, nickName, password);
 
-    if ( response.massage == undefined) {
+    if ( response.message == undefined) {
         return res.status(200).json(response);
     }
 

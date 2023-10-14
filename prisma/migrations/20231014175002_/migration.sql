@@ -15,6 +15,7 @@ CREATE TABLE "Movie" (
     "synopsis" TEXT NOT NULL,
     "releaseYear" TEXT NOT NULL,
     "duration" TEXT NOT NULL,
+    "imageURL" TEXT,
     "publicId" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" DATETIME NOT NULL

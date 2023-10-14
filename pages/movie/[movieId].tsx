@@ -89,23 +89,34 @@ export default function moviePage({movieId}: any) {
                             </div>
                             <h3 className={styles.h3}>Synopsis</h3>
                             <p className={styles.p}>{data.synopsis}</p>
-                            <h3 className={styles.h3}>Rating</h3>
+                            <h3 className={styles.h3}>Reviews</h3>
                             <div className={styles.rating}>
-                                <h3>Your Review</h3>
+                                <h4 className={styles.h4}>Make your Review</h4>
                                 <form onSubmit={formSubmit}>
-                                    <input type="number" value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />
-                                    <textarea className='' value={formRating.description} onChange={(event) => {handleFormEdit(event, "description")}} placeholder='Leave your review'></textarea>
+                                    <div className={styles.reviewInputs}>
+                                        <div className={styles.inputGrades}>
+                                            <label className={styles.labelInputs} htmlFor="grade">Select your Grade</label>
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />1
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />2
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />3
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />4
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />5
+                                        </div>
+                                        <div className={styles.descriptionDiv}>
+                                            <label className={styles.labelInputs} htmlFor="description">Describe your Rating</label>
+                                            <textarea className={styles.textareaDescription} value={formRating.description} onChange={(event) => {handleFormEdit(event, "description")}} placeholder='Mussum Ipsum, cacilds vidis litro abertis. Quem num gosta di mé, boa gentis num é.'></textarea>
+                                        </div>
+                                    </div>
+                                    <button className={styles.sendButton}>Send</button>
                                 </form>
                             </div>
                             <div>
-                                <h3>Reviews</h3>
+                                <h4 className={styles.h4}>Public reviews</h4>
                                 {data.ratings.map(rating => (
                                     <div className={styles.singleComment}>
-                                        <label>UserName: {rating.user.userName}</label>
-                                        <br />
-                                        <label>Nota: {rating.value}</label>
-                                        <br />
-                                        <label>Comentário: {rating.description}</label>
+                                        <p>UserName: {rating.user.userName}</p>
+                                        <p>Nota: {rating.value}</p>
+                                        <p>Comentário: {rating.description}</p>
                                     </div>
                                 ))}
                             </div>
