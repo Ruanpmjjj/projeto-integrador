@@ -102,7 +102,7 @@ export default function Home({ verifiedToken }: any) {
       <div className={`flex flex-wrap ${styles.movies}`}>
         {data != undefined && data instanceof Array ? data.map(item => (
           <div onClick={() => {movieClick(item.publicId)}} className={`${styles.container} ${styles.cursor}`}>
-            <img className={styles.movieImg} src="/images/movie.png" alt={item.title} />
+            <img className={styles.movieImg} src={item.imageURL} alt={item.title} />
             <div className={styles.movieInfo}>
               <h3 className={styles.h3}>{item.title}</h3>
               <p>Release: {item.releaseYear}</p>

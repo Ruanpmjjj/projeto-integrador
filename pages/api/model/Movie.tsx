@@ -1,12 +1,24 @@
 import { prisma } from "@/db";
 
-export async function createMovieModel(title: string , synopsis: string, releaseYear: string, duration: string) {
+export async function createMovieModel(title: string , synopsis: string, releaseYear: string, duration: string, image: string, genres: Array<number>) {
+    var connectArray: Array<any> = [];
+
+    genres.map(item => (
+        connectArray.push({
+            id: item
+        })
+    ));
+
     const movie = await prisma.movie.create({
         data: {
             title: title,
             synopsis: synopsis,
             releaseYear: releaseYear,
-            duration: duration
+            duration: duration,
+            imageURL: image,
+            genres: {
+                connect: connectArray
+            }
         }
     });
 

@@ -1,8 +1,8 @@
 import * as movie from "../model/Movie";
 
-export async function createMovie(title:string, synopsis:string, releaseYear: string, duration: string) {
+export async function createMovie(title:string, synopsis:string, releaseYear: string, duration: string, image: string, genres: Array<number>) {
     try {
-        const response = await movie.createMovieModel(title, synopsis, releaseYear, duration);
+        const response = await movie.createMovieModel(title, synopsis, releaseYear, duration, image, genres);
         return response;
     }
     catch(err){

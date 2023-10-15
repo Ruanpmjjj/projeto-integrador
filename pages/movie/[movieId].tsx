@@ -96,11 +96,11 @@ export default function moviePage({movieId}: any) {
                                     <div className={styles.reviewInputs}>
                                         <div className={styles.inputGrades}>
                                             <label className={styles.labelInputs} htmlFor="grade">Select your Grade</label>
-                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />1
-                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />2
-                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />3
-                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />4
-                                            <input className={styles.radioButtons} type="radio" name='grade' value={formRating.grade} onChange={(event) => {handleFormEdit(event, "grade")}} />5
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={1} onChange={(event) => {handleFormEdit(event, "grade")}} required/>1
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={2} onChange={(event) => {handleFormEdit(event, "grade")}} required/>2
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={3} onChange={(event) => {handleFormEdit(event, "grade")}} required/>3
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={4} onChange={(event) => {handleFormEdit(event, "grade")}} required/>4
+                                            <input className={styles.radioButtons} type="radio" name='grade' value={5} onChange={(event) => {handleFormEdit(event, "grade")}} required/>5
                                         </div>
                                         <div className={styles.descriptionDiv}>
                                             <label className={styles.labelInputs} htmlFor="description">Describe your Rating</label>
@@ -113,9 +113,9 @@ export default function moviePage({movieId}: any) {
                             <div>
                                 <h4 className={styles.h4}>Public reviews</h4>
                                 {data.ratings.map(rating => (
-                                    <div className={styles.singleComment}>
-                                        <p>UserName: {rating.user.userName}</p>
-                                        <p>Nota: {rating.value}</p>
+                                    <div className={styles.userReviews}>
+                                        <p>UserName: {rating.user.nickName}</p>
+                                        <p>Nota: {rating.grade}</p>
                                         <p>Comentário: {rating.description}</p>
                                     </div>
                                 ))}

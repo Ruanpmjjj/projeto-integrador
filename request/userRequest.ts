@@ -4,7 +4,7 @@ import * as check from "./check";
 export default function userRequest(password: any, email: any, name: any){
 
     if (!check.isEmail(email)) {
-        return {status: false, message: "Ivalid Email."};
+        return {status: false, message: "Invalid Email."};
     }
 
     if (!check.checkMinAndMaxLength(password, 6, 32)) {

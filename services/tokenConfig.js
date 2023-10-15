@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
-const SECRET = process.env.JWT_SECRET;
+const SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
 
-export function generateToken(_email) {
-    return jwt.sign( { email: _email } , SECRET );
+export function generateToken(login) {
+    return jwt.sign( { login: login } , SECRET );
 }
 
 function readToken(token) {

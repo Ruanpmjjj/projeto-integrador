@@ -5,6 +5,7 @@ import * as ratingModel from "../model/Rating";
 export async function createRating(grade: number, email: string, moviePublicId: string, description = "") {
     try {
         const userByEmail = await findUserByModelEmail(email);
+        console.log(userByEmail);
         
         if (userByEmail == undefined) {
             return { message: "User not found."};

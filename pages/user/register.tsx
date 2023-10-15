@@ -27,6 +27,9 @@ export default function cadastroPage() {
 
     async function formSubmit(event: any) {
 
+        console.log(formData);
+        
+
         try {
             event.preventDefault();
 

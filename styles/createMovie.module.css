@@ -82,6 +82,32 @@
     min-height: 180px;
 }
 
+.inputImage {
+    margin: auto;
+    color: white;
+}
+
+.divGenres {
+    display: flex;
+    justify-content: center;
+}
+
+.divSelectGenres {
+    justify-content: center;
+    margin: auto;
+}
+
+.checkboxGenre {
+    width: 15px;
+    height: 15px;
+}
+
+.labelGenre {
+    color: white;
+    font-size: 1.1em;
+    margin-left: 1em;
+}
+
 .createMovieButton {
     width: 200px;
     margin: 10px auto 20px;

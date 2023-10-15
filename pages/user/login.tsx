@@ -10,7 +10,7 @@ export default function loginPage() {
     const router = useRouter(); 
     
     const [formData, setFormData] = useState({
-        email: '',
+        login: '',
         password: ''
     })
 
@@ -28,7 +28,7 @@ export default function loginPage() {
             const response = await fetch(`/api/actions/user/login`, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application.json',
+                    'Content-type': 'application/json',
                 },
                 body: JSON.stringify(formData)
             })
@@ -58,13 +58,13 @@ export default function loginPage() {
 
             <div className="login-div">
                 <p className={styles.p1}>Login</p>
-                <form>
+                <form onSubmit={formSubmit}>
                     <label className="block">
                         <span className="block text-sm font-medium text-slate-700">UserName or Email</span>
-                        <input className={styles.input} type="text" placeholder="login" />
+                        <input className={styles.input} type="text" placeholder="login" value={formData.login} onChange={(event) => {handleFormEdit(event, "login")}}/>
                         <p></p>
                         <span className="block text-sm font-medium text-slate-700">Password</span>
-                        <input className={styles.input} type="password" placeholder="senha" />
+                        <input className={styles.input} type="password" placeholder="senha" value={formData.password} onChange={(event) => {handleFormEdit(event, "password")}}/>
                         <p></p>
                         <Link className={styles.sendButton} href={`/user/register`}>Não tenho uma conta</Link>
                         <br />
@@ -92,7 +92,7 @@ export function getServerSideProps({ req, res }: any) {
         return {
             redirect: {
                 permanent: false,
-                destination: `/movie/create`,
+                destination: `/`,
             },
             props: {}
         };
