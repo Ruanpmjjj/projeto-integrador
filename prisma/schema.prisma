@@ -40,8 +40,8 @@ model Rating {
   id          Int    @id @unique @default(autoincrement())
   grade       Int
   description String
-  userId      Int    @unique
-  movieId     Int    @unique
+  userId      Int
+  movieId     Int    
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

@@ -44,17 +44,22 @@ export default function Home({ verifiedToken }: any) {
     }
     else {
       return array.filter(
-        (el: any) => el.name.toLowerCase().includes(text)
+        (el: any) => el.title.toLowerCase().includes(text)
       )
     }
   }
 
   async function formSubmit(event: any) {
+    console.log(name);
+    
+    
     try {
       event.preventDefault();
 
       const filteredArray = searchFilter(saveData, name); 
       setData(filteredArray);
+      console.log(data);
+      
 
     }
     catch (err) {

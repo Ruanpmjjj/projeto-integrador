@@ -91,7 +91,7 @@ export default function createMovie() {
             if (response.status != 200) {
                 throw new Error(responseJson.message);
             }
-
+            
             createMovie(responseJson.secure_url)
 
         }
@@ -110,6 +110,8 @@ export default function createMovie() {
                 body: JSON.stringify({
                     title: formData.title,
                     releaseYear: formData.releaseYear,
+                    synopsis: formData.synopsis,
+                    duration: formData.duration,
                     genres: selectedGenres,
                     image: imgURL
                 })
@@ -136,7 +138,7 @@ export default function createMovie() {
                         <a className={styles.cursor} href={'/'}>Back to Home Page</a>
                     </div>
                     <div className={styles.menuSuperiorDireita}>
-                        <a className={styles.cursor}>Log Out</a>
+                        <a onClick={logOut} className={styles.cursor}>Log Out</a>
                     </div>
                 </div>
             </div>

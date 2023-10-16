@@ -32,7 +32,7 @@ export async function loginUser(_password:string, _email:string | null, _nickNam
                 return {message: "incorrect email or password"}
             }
         
-            const _token = generateToken(userLogin.email);
+            const _token = generateToken(userLogin.nickName);
             return {token: _token}
         }
 

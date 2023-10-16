@@ -1,13 +1,12 @@
 import { findMovieByPublicIdModel } from "../model/Movie";
-import { findUserByModelEmail } from "../model/user";
+import { findUserByModelNickName } from "../model/user";
 import * as ratingModel from "../model/Rating";
 
-export async function createRating(grade: number, email: string, moviePublicId: string, description = "") {
-    try {
-        const userByEmail = await findUserByModelEmail(email);
-        console.log(userByEmail);
+export async function createRating(grade: number, nickName: string, moviePublicId: string, description = "") {
+    //try {
+        const userByNickName = await findUserByModelNickName(nickName);
         
-        if (userByEmail == undefined) {
+        if (userByNickName == undefined) {
             return { message: "User not found."};
         }
 
@@ -17,17 +16,19 @@ export async function createRating(grade: number, email: string, moviePublicId: 
             return { message: "Movie not found."};
         }
 
-        const ratingByUserAndMovie = await ratingModel.findRatingByUserAndMovieModel(userByEmail.id, movieByPublicId.id);
+        const ratingByUserAndMovie = await ratingModel.findRatingByUserAndMovieModel(userByNickName.id, movieByPublicId.id);
 
         if (ratingByUserAndMovie != undefined) {
             return { message: "Rating already exists"};
         }
 
-        const response = await ratingModel.createRatingModel(grade, description, userByEmail.id, movieByPublicId.id);
+        const response = await ratingModel.createRatingModel(grade, description, userByNickName.id, movieByPublicId.id);
+
+        console.log(response);
 
         return response;
 
-    } catch (error) {
+    //} catch (error) {
         return { message: "Something went Wrong."};
-    }
+    //}
 }

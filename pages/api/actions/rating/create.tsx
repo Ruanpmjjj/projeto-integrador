@@ -6,10 +6,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(403).json({ message: "Method not allowed" });
     }
 
-    const { grade, description, userName, movieTitle } = req.body;
+    const { grade, description, userName, moviePublicId } = req.body;
 
     // create model
-    const response: any = await createRating(grade, description, userName, movieTitle);
+    const response: any = await createRating(grade, userName, moviePublicId, description);
 
     if ( response.message != undefined ) {
         return res.status(403).json( response );

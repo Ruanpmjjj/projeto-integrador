@@ -32,8 +32,8 @@ export default function moviePage({movieId}: any) {
                 body: JSON.stringify({
                     grade: Number(formRating.grade),
                     description: formRating.description,
-                    userName: tokenInfos.userName,
-                    movieId: movieId
+                    userName: tokenInfos.login,
+                    moviePublicId: movieId
                 })
             })
 
@@ -80,7 +80,7 @@ export default function moviePage({movieId}: any) {
             {data != undefined ?
                 <div className={styles.container}>
                     <div className={styles.flexInfoMovie}>
-                        <img className={styles.movieImg} src="/images/movie.png" alt={data.title} />
+                        <img className={styles.movieImg} src={data.imageURL} alt={data.title} />
                         <div className={styles.movieInfo}>
                             <h1 className={styles.h1}>{data.title}</h1>
                             <div className={styles.h2}>
