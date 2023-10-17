@@ -16,7 +16,7 @@
     width: 1200px;
     margin: auto;
 } 
-
+ 
 .cursor {
     cursor:pointer;
     color: black;
@@ -35,7 +35,7 @@
 
 .moviePage {
     width: 1200px;
-    margin: 50px auto auto;
+    margin: 50px auto;
 }
 
 .container{
@@ -89,6 +89,7 @@
     background-color: rgb(206, 206, 206);
     border-radius: 5px;
     margin-left: 40px;
+    margin-bottom: 10px;
     text-align: left;
     padding: 1em;
 }
@@ -140,6 +141,7 @@
 
 .movieImg {
     height: 300px;
+    width: 250px;
 }
 
 .movieInfo {

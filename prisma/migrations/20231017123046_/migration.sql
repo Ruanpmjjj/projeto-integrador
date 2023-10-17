@@ -69,12 +69,6 @@ CREATE UNIQUE INDEX "Movie_publicId_key" ON "Movie"("publicId");
 CREATE UNIQUE INDEX "Rating_id_key" ON "Rating"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Rating_userId_key" ON "Rating"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Rating_movieId_key" ON "Rating"("movieId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Genre_id_key" ON "Genre"("id");
 
 -- CreateIndex

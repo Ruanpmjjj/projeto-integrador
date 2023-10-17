@@ -116,7 +116,9 @@
 
 .movieImg {
     height: 200px;
-    margin: 20px auto; 
+    width: 180px;
+    margin: 20px auto;
+    border-radius: 5px;
 }
 
 .movieInfo {

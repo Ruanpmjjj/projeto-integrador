@@ -8,7 +8,7 @@ import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ verifiedToken }: any) {
+export default function Home() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [data, setData]: Array<any> = useState(undefined);

@@ -19,8 +19,6 @@ export default function moviePage({movieId}: any) {
 
     async function formSubmit(event: any) {
         try {
-            event.preventDefault();
-
             const cookieAuth = getCookie('authorization');
             const tokenInfos = checkToken(cookieAuth);
 
@@ -87,6 +85,10 @@ export default function moviePage({movieId}: any) {
                                 <h2>Release Date: {data.releaseYear}</h2>
                                 <h2>Duration: {data.duration}</h2>
                             </div>
+                            <h3 className={styles.h3}>Genres</h3>
+                            {data.genres.map(genre => (
+                                <p>teste{genre.name}</p>
+                            ))}
                             <h3 className={styles.h3}>Synopsis</h3>
                             <p className={styles.p}>{data.synopsis}</p>
                             <h3 className={styles.h3}>Reviews</h3>
